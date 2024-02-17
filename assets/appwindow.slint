@@ -1,0 +1,49 @@
+import { Button, LineEdit } from "std-widgets.slint";
+import "./Oswald-Regular.ttf";
+
+export component MainWindow inherits Window {
+    default-font-family: "Oswald";
+    default-font-size: 20px;
+    in-out property <string> time: "00:00:00";
+    background: #C65936;
+    height: 400px;
+    width: 400px;
+    VerticalLayout {
+        padding: 20px;
+        HorizontalLayout {
+            alignment: center;
+            padding-top: 20px;
+            Text {
+                text: "Chronometer";
+                color: black;
+            }
+        }
+
+        HorizontalLayout {
+            alignment: center;
+            LineEdit {
+                font-size: 20px;
+                width: 200px;
+                height: 30px;
+                horizontal-alignment: center;
+            }
+            padding-bottom: 20px;
+        }
+
+        Text {
+            padding: 20px;
+            horizontal-alignment: center;
+            text: "\{root.time}";
+        }
+
+        HorizontalLayout {
+            alignment: center;
+            max-height: 20px;
+            padding-bottom: 20px;
+            Button {
+                width: 160px;
+                text: "Start Timer";
+            }
+        }
+    }
+}
