@@ -1,48 +1,64 @@
-import { Button, LineEdit } from "std-widgets.slint";
+import { StandardButton, Button, LineEdit } from "std-widgets.slint";
 import "./Oswald-Regular.ttf";
 
 export component MainWindow inherits Window {
     default-font-family: "Oswald";
     default-font-size: 20px;
+    in-out property <int> seconds: 0;
     in-out property <string> time: "00:00:00";
+    in-out property <bool> started: false;
+    in-out property <string> button_text: "Start Timer";
+    callback button-pressed <=> button.clicked;
+
+    title: "Chronometer";
     background: #C65936;
-    height: 400px;
-    width: 400px;
+    preferred-height: 150px;
+    preferred-width: 100%;
     VerticalLayout {
         padding: 20px;
-        HorizontalLayout {
+        padding-left: 200px;
+        padding-right: 200px;
+
+        if root.started: HorizontalLayout {
             alignment: center;
-            padding-top: 20px;
+            padding: 20px;
             Text {
-                text: "Chronometer";
-                color: black;
+                visible: root.started;
+                padding: 20px;
+                horizontal-alignment: center;
+                text: "Taking a small break!";
+                font-size: 42px;
             }
         }
 
         HorizontalLayout {
             alignment: center;
-            LineEdit {
+            padding: 20px;
+            if !root.started: textentry := LineEdit {
+                padding: 20px;
                 font-size: 20px;
                 width: 200px;
                 height: 30px;
                 horizontal-alignment: center;
+                edited => {root.time = textentry.text}
             }
-            padding-bottom: 20px;
-        }
 
-        Text {
-            padding: 20px;
-            horizontal-alignment: center;
-            text: "\{root.time}";
+            if root.started: Text {
+                visible: root.started;
+                padding: 20px;
+                horizontal-alignment: center;
+                text: "\{root.time}";
+                font-size: 72px;
+            }
         }
 
         HorizontalLayout {
             alignment: center;
+            padding: 20px;
             max-height: 20px;
-            padding-bottom: 20px;
-            Button {
+            button := Button {
                 width: 160px;
-                text: "Start Timer";
+                text: "\{root.button_text}";
             }
         }
     }
