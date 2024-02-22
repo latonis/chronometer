@@ -3,6 +3,10 @@ Welcome to this wonderful repository where I try out an application in rust with
 
 This was built on stream at https://twitch.tv/justtoocloudy
 
+## UI Crate
+This application was built leveraging the Slint UI Toolkit
+- Website: https://slint.dev/
+- Crate: https://crates.io/crates/slint
 ## Usage
 
 ### Setting Time via CLI
